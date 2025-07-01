@@ -339,6 +339,7 @@ The Kubernetes version ({{{ k0s_version.split('+') | first }}}) is the first par
 Here’s an example of how to set a single node cluster:
 
 ```console
+<<<<<<< HEAD:docs/governance/cncf/gtr.md
 # export K0S_VERSION={{{ k0s_version }}}
 # curl -sSfL https://github.com/k0sproject/k0s/releases/download/$K0S_VERSION/k0s-$K0S_VERSION-amd64 -o k0s
 # chmod u+x k0s
