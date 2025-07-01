@@ -64,6 +64,19 @@
       "allowedVersions": "<=1.23"
     },
     {
+      "description": "Bump kubernetes for main",
+      "enabled": true,
+      "matchManagers": [
+        "gomod",
+        "custom.regex"
+      ],
+      "matchDepNames": [
+        "k8s.io/kubernetes",
+        "k8s.io/**",
+        "sigs.k8s.io/**"
+      ]
+    },
+    {
       "description": "Bump kubernetes for release-1.33",
       "enabled": true,
       "matchBaseBranches": [
@@ -74,11 +87,26 @@
         "custom.regex"
       ],
       "matchDepNames": [
-        "k8s.io/kubernetes",
+        "k8s.io/kubernetes"
+      ],
+      "allowedVersions": "<= 0.33 || <= 1.33",
+      "groupName": "kubernetes 1.33",
+      "groupSlug": "kubernetes-1.33"
+    },
+    {
+      "description": "Bump kubernetes dependencies for release-1.33",
+      "enabled": true,
+      "matchBaseBranches": [
+        "release-1.33"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchDepNames": [
         "k8s.io/**",
         "sigs.k8s.io/**"
       ],
-      "allowedVersions": "<= 0.33 || <= 1.33",
+      "allowedVersions": "<= 1.33",
       "groupName": "kubernetes 1.33",
       "groupSlug": "kubernetes-1.33"
     }
@@ -181,7 +209,7 @@
     },
     {
       "customType": "regex",
-      "description": "kubernetes version in makefile.variables",
+      "description": "Update Kubernetes version",
       "managerFilePatterns": [
         "embedded-bins/Makefile.variables",
         "inttest/sonobuoy/README.md",
