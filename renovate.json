@@ -62,6 +62,74 @@
         "go"
       ],
       "allowedVersions": "<=1.23"
+    },
+    {
+      "description": "Bump kubernetes for release-1.32",
+      "enabled": true,
+      "matchBaseBranches": [
+        "release-1.32"
+      ],
+      "matchManagers": [
+        "gomod",
+        "custom.regex"
+      ],
+      "matchDepNames": [
+        "k8s.io/kubernetes"
+      ],
+      "allowedVersions": "<= 1.32",
+      "groupName": "kubernetes 1.32",
+      "groupSlug": "kubernetes-1.32"
+    },
+    {
+      "description": "Bump kubernetes dependencies for release-1.32",
+      "enabled": true,
+      "matchBaseBranches": [
+        "release-1.32"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchDepNames": [
+        "k8s.io/**",
+        "sigs.k8s.io/**"
+      ],
+      "allowedVersions": "<= 0.32",
+      "groupName": "kubernetes 1.32",
+      "groupSlug": "kubernetes-1.32"
+    },
+    {
+      "description": "Bump kubernetes for release-1.33",
+      "enabled": true,
+      "matchBaseBranches": [
+        "release-1.33"
+      ],
+      "matchManagers": [
+        "gomod",
+        "custom.regex"
+      ],
+      "matchDepNames": [
+        "k8s.io/kubernetes"
+      ],
+      "allowedVersions": "<= 1.33",
+      "groupName": "kubernetes 1.33",
+      "groupSlug": "kubernetes-1.33"
+    },
+    {
+      "description": "Bump kubernetes dependencies for release-1.33",
+      "enabled": true,
+      "matchBaseBranches": [
+        "release-1.33"
+      ],
+      "matchManagers": [
+        "gomod"
+      ],
+      "matchDepNames": [
+        "k8s.io/**",
+        "sigs.k8s.io/**"
+      ],
+      "allowedVersions": "<= 0.33",
+      "groupName": "kubernetes 1.33",
+      "groupSlug": "kubernetes-1.33"
     }
   ],
   "customManagers": [
@@ -159,6 +227,27 @@
       "datasourceTemplate": "{{{datasource}}}",
       "registryUrlTemplate": "{{#if registryUrl}}{{{registryUrl}}}{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "description": "Update Kubernetes version",
+      "managerFilePatterns": [
+        "embedded-bins/Makefile.variables",
+        "inttest/update-server/html/unstable/index.yaml",
+        "pkg/constant/constant.go",
+        "pkg/component/worker/kubelet.go",
+        "go.mod"
+      ],
+      "matchStrings": [
+        "kubernetes_version = (?<currentValue>\\d+(\\.\\d+){2})",
+        "version: \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\\+k0s\\.",
+        "v(?<currentValue>\\d+\\.\\d+\\.\\d+)\\+k0s\\.",
+        "KubeProxyImageVersion\\s*=\\s*\"v(?<currentValue>\\d+\\.\\d+\\.\\d+)\"",
+        "github\\.com/kubernetes/kubernetes/blob/v(?<currentValue>\\d+\\.\\d+\\.\\d+)/"
+      ],
+      "depNameTemplate": "k8s.io/kubernetes",
+      "datasourceTemplate": "go",
+      "versioningTemplate": "semver"
     }
   ]
 }
