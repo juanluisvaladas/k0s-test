@@ -62,6 +62,26 @@
         "go"
       ],
       "allowedVersions": "<=1.23"
+    },
+    {
+      "description": "Bump kubernetes for release-1.33",
+      "enabled": true,
+      "matchBaseBranches": [
+        "release-1.33"
+      ],
+      "matchManagers": [
+        "gomod",
+        "custom.regex"
+      ],
+      "matchDepNames": [
+        "k8s.io/kubernetes",
+        "k8s.io/**",
+        "sigs.k8s.io/**",
+        "kubernetes/kubernetes"
+      ],
+      "allowedVersions": "<= 0.33 || <= 1.33",
+      "groupName": "kubernetes 1.33 dependencies",
+      "groupSlug": "kubernetes-1.33"
     }
   ],
   "customManagers": [
@@ -159,6 +179,19 @@
       "datasourceTemplate": "{{{datasource}}}",
       "registryUrlTemplate": "{{#if registryUrl}}{{{registryUrl}}}{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "description": "kubernetes version",
+      "managerFilePatterns": [
+        "embedded-bins/Makefile.variables"
+      ],
+      "matchStrings": [
+        "kubernetes_version = (?<currentValue>\\d+(\\.\\d+){2})"
+      ],
+      "depNameTemplate": "kubernetes/kubernetes",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
     }
   ]
 }
