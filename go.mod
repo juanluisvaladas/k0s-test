@@ -152,7 +152,7 @@ require (
 	github.com/google/btree v1.1.3 // indirect
 	github.com/google/cel-go v0.23.2 // indirect
 	github.com/google/certificate-transparency-go v1.1.7 // indirect
-	github.com/google/gnostic-models v0.6.9 // indirect
+	github.com/google/gnostic-models v0.7.0 // indirect
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
@@ -272,7 +272,7 @@ require (
 	k8s.io/controller-manager v0.33.1 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kms v0.33.1 // indirect
-	k8s.io/kube-openapi v0.0.0-20250318190949-c8a335a9a2ff // indirect
+	k8s.io/kube-openapi v0.0.0-20250701173324-9bd5c66d9911 // indirect
 	k8s.io/metrics v0.33.1 // indirect
 	sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.32.0 // indirect
 	sigs.k8s.io/json v0.0.0-20241010143419-9aa6b5e7a4b3 // indirect
