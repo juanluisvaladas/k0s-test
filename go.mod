@@ -69,7 +69,7 @@ require (
 	k8s.io/apiextensions-apiserver v0.34.0-alpha.2
 	k8s.io/apimachinery v0.34.0-alpha.2
 	k8s.io/cli-runtime v0.34.0-alpha.2
-	k8s.io/client-go v0.34.0-alpha.2
+	k8s.io/client-go v11.0.0+incompatible
 	k8s.io/cloud-provider v0.34.0-alpha.2
 	k8s.io/cluster-bootstrap v0.34.0-alpha.2
 	k8s.io/component-base v0.34.0-alpha.2
@@ -280,7 +280,7 @@ require (
 	sigs.k8s.io/kustomize/kustomize/v5 v5.6.0 // indirect
 	sigs.k8s.io/kustomize/kyaml v0.19.0 // indirect
 	sigs.k8s.io/randfill v1.0.0 // indirect
-	sigs.k8s.io/structured-merge-diff/v4 v4.7.0 // indirect
+	sigs.k8s.io/structured-merge-diff/v6 v6.1.0 // indirect
 )
 
 // Replacements duplicated from upstream Kubernetes
@@ -291,7 +291,7 @@ replace (
 	k8s.io/apimachinery => k8s.io/apimachinery v0.34.0-alpha.2
 	k8s.io/apiserver => k8s.io/apiserver v0.34.0-alpha.2
 	k8s.io/cli-runtime => k8s.io/cli-runtime v0.34.0-alpha.2
-	k8s.io/client-go => k8s.io/client-go v0.34.0-alpha.2
+	k8s.io/client-go => k8s.io/client-go v11.0.0+incompatible
 	k8s.io/cloud-provider => k8s.io/cloud-provider v0.34.0-alpha.2
 	k8s.io/cluster-bootstrap => k8s.io/cluster-bootstrap v0.34.0-alpha.2
 	k8s.io/code-generator => k8s.io/code-generator v0.34.0-alpha.2
