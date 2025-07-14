@@ -22,7 +22,7 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v43.0.2
         with:
-          configurationFile: renovate.json
+          configurationFile: ./github/renovate.json
           # Use the same token as the backport workflow. If this token is
           # unavailable, i.e. if the workflow is triggered on a fork, use the
           # stock GitHub Actions token instead ("Allow GitHub Actions to create
