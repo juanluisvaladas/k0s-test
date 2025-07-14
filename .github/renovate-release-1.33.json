@@ -3,6 +3,9 @@
     "packageRules": [
         {
             "enabled": true,
+            "matchDatasources": [
+                "golang-version"
+            ],
             "matchDepNames": [
                 "go"
             ],

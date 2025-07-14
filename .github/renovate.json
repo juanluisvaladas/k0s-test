@@ -24,37 +24,6 @@
   ],
   "packageRules": [
     {
-      "matchBaseBranches": [
-        "main"
-      ],
-      "extends": [
-        "github>juanluisvaladas/k0s-test//.github/renovate-main.json"
-      ]
-    },
-    {
-      "matchBaseBranches": [
-        "release-1.33"
-      ],
-      "extends": [
-        "github>juanluisvaladas/k0s-test//.github/renovate-release-1.33.json"
-      ]
-    },
-    {
-      "matchBaseBranches": [
-        "release-1.32"
-      ],
-      "extends": [
-        "github>juanluisvaladas/k0s-test//.github/renovate-release-1.32.json"
-      ]
-    },
-    {
-      "description": "Ignore all Go dependencies by default",
-      "enabled": false,
-      "matchManagers": [
-        "gomod"
-      ]
-    },
-    {
       "description": "Group all etcd updates (go.mod and Makefile) into a single PR",
       "matchManagers": [
         "gomod",
@@ -75,6 +44,33 @@
       "matchBaseBranches": [
         "!main"
       ]
+    },
+    {
+      "matchBaseBranches": [
+        "main"
+      ],
+      "extends": [
+        "github>juanluisvaladas/k0s-test//.github/renovate-main.json"
+      ],
+      "enabled": true
+    },
+    {
+      "matchBaseBranches": [
+        "release-1.33"
+      ],
+      "extends": [
+        "github>juanluisvaladas/k0s-test//.github/renovate-release-1.33.json"
+      ],
+      "enabled": true
+    },
+    {
+      "matchBaseBranches": [
+        "release-1.32"
+      ],
+      "extends": [
+        "github>juanluisvaladas/k0s-test//.github/renovate-release-1.32.json"
+      ],
+      "enabled": true
     }
   ],
   "customManagers": [
