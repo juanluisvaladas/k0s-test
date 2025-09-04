@@ -237,13 +237,17 @@ jobs:
       fail-fast: false
       matrix:
         smoke-suite: ${{ fromJson(needs.prepare.outputs.smoketest-matrix) }}
+        target-arch:
+          - amd64
+          - arm64
 
-    name: "Smoke test :: ${{ matrix.smoke-suite }}"
+    name: "Smoke test :: ${{ matrix.smoke-suite }} :: ${{ matrix.target-arch }}"
     needs: [prepare, build-k0s, build-airgap-image-bundle, build-ipv6-image-bundle]
 
     uses: ./.github/workflows/smoketest.yaml
     with:
       name: ${{ matrix.smoke-suite }}
+      target-arch: ${{ matrix.target-arch }}
 
   autopilot-tests:
     strategy:
