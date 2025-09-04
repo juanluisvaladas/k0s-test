@@ -268,7 +268,6 @@ jobs:
 
   build-arm:
     name: build on armv7
-    if: github.repository == 'k0sproject/k0s'
     runs-on:
       - linux
       - arm64
