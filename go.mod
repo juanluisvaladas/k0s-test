@@ -299,7 +299,7 @@ replace (
 	k8s.io/cri-api => k8s.io/cri-api v0.34.0-alpha.2
 	k8s.io/cri-client => k8s.io/cri-client v0.34.0-alpha.2
 	k8s.io/csi-translation-lib => k8s.io/csi-translation-lib v0.34.0-alpha.2
-	k8s.io/dynamic-resource-allocation => k8s.io/dynamic-resource-allocation v0.34.0-alpha.2
+	k8s.io/dynamic-resource-allocation => k8s.io/dynamic-resource-allocation v0.34.0
 	k8s.io/endpointslice => k8s.io/endpointslice v0.34.0-alpha.2
 	k8s.io/externaljwt => k8s.io/externaljwt v0.34.0-alpha.2
 	k8s.io/kms => k8s.io/kms v0.34.0-alpha.2
