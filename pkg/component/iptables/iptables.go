@@ -189,5 +189,7 @@ func findMatchingEntries(k0sBinPath, mode string, entries ...string) (entriesFou
 		return false, 0, fmt.Errorf("iptables-save: %w; ip6tables-save: %w", v4Err, v6Err)
 	}
 
+	// trigger ci
+
 	return entriesFound, total, nil
 }
