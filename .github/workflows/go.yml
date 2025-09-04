@@ -247,7 +247,6 @@ jobs:
     uses: ./.github/workflows/smoketest.yaml
     with:
       name: ${{ matrix.smoke-suite }}
-      target-arch: ${{ matrix.target-arch }}
 
   autopilot-tests:
     strategy:
