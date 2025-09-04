@@ -99,10 +99,13 @@ jobs:
   build-k0s:
     strategy:
       matrix:
-        target-os: [linux, windows]
-        target-arch:
-          - amd64
-          - arm64
+        include:
+          - target-os: linux
+            target-arch: amd64
+          - target-os: linux
+            target-arch: arm64
+          - target-os: windows
+            target-arch: amd64
 
     name: "Build :: k0s :: ${{ matrix.target-os }}-${{ matrix.target-arch }}"
     uses: ./.github/workflows/build-k0s.yml
