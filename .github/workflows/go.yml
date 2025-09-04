@@ -365,7 +365,6 @@ jobs:
   # smoke-test step only start after both arm and armv7 builds have finished.
   smoketest-arm:
     name: Smoke test on armv7 -- ${{ matrix.test }}
-    if: github.repository == 'k0sproject/k0s'
     needs: [build-arm]
     strategy:
       fail-fast: false
