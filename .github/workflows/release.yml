@@ -47,7 +47,7 @@ jobs:
           echo IMAGE_TAGS="${TAGS//+/-}" >> $GITHUB_OUTPUT
   x64:
     needs: release
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [linux, x64]
     env:
       SEGMENT_TOKEN: ${{ secrets.SEGMENT_WRITE_KEY_PROD }}
     steps:
@@ -164,7 +164,7 @@ jobs:
 
   windows:
     needs: release
-    runs-on: [self-hosted, linux, x64]
+    runs-on: [linux, x64]
     env:
       SEGMENT_TOKEN: ${{ secrets.SEGMENT_WRITE_KEY_PROD }}
       TARGET_OS: windows
@@ -235,7 +235,7 @@ jobs:
 
   arm64:
     needs: release
-    runs-on: [self-hosted, linux, arm64]
+    runs-on: [linux, arm64]
     env:
       SEGMENT_TOKEN: ${{ secrets.SEGMENT_WRITE_KEY_PROD }}
     steps:
