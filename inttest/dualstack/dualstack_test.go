@@ -186,6 +186,21 @@ func (s *DualstackSuite) SetupSuite() {
 	})
 	s.Require().NoError(err)
 	s.client = client
+
+	s.T().Log("Validate the kube-dns service address")
+	s.validateKubeDNSIP(client)
+}
+
+func (s *DualstackSuite) validateKubeDNSIP(client *k8s.Clientset) {
+	svc, err := client.CoreV1().Services(metav1.NamespaceSystem).Get(s.Context(), "kube-dns", metav1.GetOptions{})
+	s.NoError(err, "failed to get service kube-dns")
+	svcIP := net.ParseIP(svc.Spec.ClusterIP)
+	if s.defaultIPv6 {
+		s.Require().Nil(svcIP.To4(), "kube-dns has an unexpected IPv4 address")
+		s.Require().NotNil(svcIP.To16(), "kube-dns has an invalid IP address")
+	} else {
+		s.Require().NotNil(svcIP.To4(), "kube-dns has an unexpected non IPv4 address")
+	}
 }
 
 func (s *DualstackSuite) getIPv6Address(nodeName string) string {
