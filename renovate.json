@@ -58,8 +58,14 @@
       "description": "Kubernetes",
       "enabled": true,
       "matchPackageNames": [
-        "k8s.io/kubernetes"
-      ]
+        "k8s.io/kubernetes",
+        "kubernetes/kubernetes"
+      ],
+      "matchBaseBranches": [
+        "main"
+      ],
+      "allowedVersions": "/^v?1\\.36\\./",
+      "ignoreUnstable": true
     },
     {
       "description": "Kubernetes Go libraries",
@@ -111,17 +117,6 @@
       "commitMessageExtra": "{{~#each upgrades}}{{~#if (equals depName \"k8s.io/kubernetes\")}} to {{{newVersion}}}{{/if}}{{/each~}}",
       "ignoreUnstable": false,
       "respectLatest": false
-    },
-    {
-      "description": "Limit Kubernetes versions on main branch",
-      "matchBaseBranches": [
-        "main"
-      ],
-      "matchPackageNames": [
-        "kubernetes/kubernetes"
-      ],
-      "allowedVersions": "/^v?1\\.36\\./",
-      "ignoreUnstable": true
     },
     {
       "description": "Ignore some pinned dependencies",
