@@ -113,6 +113,17 @@
       "respectLatest": false
     },
     {
+      "description": "Limit Kubernetes versions on main branch",
+      "matchBaseBranches": [
+        "main"
+      ],
+      "matchPackageNames": [
+        "kubernetes/kubernetes"
+      ],
+      "allowedVersions": "/^v?1\\.36\\./",
+      "ignoreUnstable": true
+    },
+    {
       "description": "Ignore some pinned dependencies",
       "enabled": false,
       "matchDatasources": [
