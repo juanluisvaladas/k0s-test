@@ -17,7 +17,7 @@ runc_build_go_ldflags = -w -s
 runc_build_go_ldflags_extra = -extldflags=-static
 
 # renovate: datasource=github-tags depName=containerd/containerd
-containerd_version_and_rev = 2.2.3@77c84241c7cbdd9b4eca2591793e3d4f4317c590
+containerd_version_and_rev = 2.3.2@fff62f14765df376e5fc36f5a8f8e795b5670f61
 containerd_revision = $(word 2,$(subst @, ,$(containerd_version_and_rev)))
 containerd_version = $(word 1,$(subst @, ,$(containerd_version_and_rev)))
 containerd_build_extra_args = --build-arg REVISION=$(containerd_revision)
