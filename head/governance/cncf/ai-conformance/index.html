@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../../../img/k0s-favicon-192.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -2942,7 +2942,7 @@
   <span class="md-ellipsis">
     
   
-    Contributing
+    Contributing guidelines
   
 
     
@@ -2958,7 +2958,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Contributing
+    Contributing guidelines
   
 
           </label>
@@ -2978,7 +2978,7 @@
   <span class="md-ellipsis">
     
   
-    Getting Started
+    Overview
   
 
     
@@ -3007,6 +3007,34 @@
     
   
     GitHub Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributors/code_guidelines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code guidelines
   
 
     
@@ -3304,7 +3332,7 @@ This shows not only that the API surface exists, but that the allocation path is
 <span class="go">dra-demo-pod-gpu-nd7zh   allocated,reserved</span>
 
 <span class="gp">$ </span>kubectl<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>dra-demo<span class="w"> </span>dra-demo-pod<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>GPU_DEVICE_0
-<span class="go">GPU_DEVICE_0=&quot;gpu-0&quot;</span>
+<span class="go">GPU_DEVICE_0="gpu-0"</span>
 </code></pre></div>
 <p>Further reading:</p>
 <ul>
@@ -3343,7 +3371,7 @@ On the test cluster, a single Tesla T4 was reconfigured to advertise four schedu
 T4 hardware does not support MIG, so time-slicing is the applicable sharing mechanism on this setup.
 This demonstrates a real sharing mode on hardware commonly used for inference and smaller training workloads.</p>
 <p>Minimal example:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>kubectl<span class="w"> </span>get<span class="w"> </span>node<span class="w"> </span>k0s-gpu-0<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.status.capacity.nvidia\.com/gpu}{&quot;\n&quot;}&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>kubectl<span class="w"> </span>get<span class="w"> </span>node<span class="w"> </span>k0s-gpu-0<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.status.capacity.nvidia\.com/gpu}{"\n"}'</span>
 <span class="go">4</span>
 
 <span class="gp">$ </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>shared-gpu<span class="w"> </span>-o<span class="w"> </span>wide
@@ -3353,7 +3381,7 @@ This demonstrates a real sharing mode on hardware commonly used for inference an
 <span class="go">shared-gpu-3   1/1     Running   k0s-gpu-0</span>
 <span class="go">shared-gpu-4   1/1     Running   k0s-gpu-0</span>
 
-<span class="gp">$ </span>kubectl<span class="w"> </span>get<span class="w"> </span>node<span class="w"> </span>k0s-gpu-0<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.metadata.labels.nvidia\.com/gpu\.sharing-strategy}{&quot;\n&quot;}&#39;</span>
+<span class="gp">$ </span>kubectl<span class="w"> </span>get<span class="w"> </span>node<span class="w"> </span>k0s-gpu-0<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.metadata.labels.nvidia\.com/gpu\.sharing-strategy}{"\n"}'</span>
 <span class="go">time-slicing</span>
 </code></pre></div>
 <p>Further reading:</p>
@@ -3387,7 +3415,7 @@ This provides concrete evidence that k0s can host an inference ingress stack wit
 <span class="gp">$ </span>curl<span class="w"> </span>-si<span class="w"> </span>http://localhost:8888/predict
 <span class="go">HTTP/1.1 200 OK</span>
 <span class="go">x-app-name: http-echo</span>
-<span class="go">{&quot;prediction&quot;:0.87}</span>
+<span class="go">{"prediction":0.87}</span>
 
 <span class="gp">$ </span>curl<span class="w"> </span>-si<span class="w"> </span>http://localhost:8888/
 <span class="go">HTTP/1.1 404 Not Found</span>
@@ -3466,12 +3494,12 @@ This is the expected and correct interaction: autoscaling decisions are made fro
 We integrated DCGM Exporter with <code>kube-prometheus-stack</code> using a <code>ServiceMonitor</code> and verified that Prometheus scraped per-GPU metrics with labels such as UUID, model, PCI bus ID, node name, and driver version.
 The important part here is not just that metrics exist, but that they are queryable through the standard Prometheus API with enough labels to identify a specific GPU on a specific node.</p>
 <p>Minimal example:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;http://localhost:9090/api/v1/query?query=DCGM_FI_DEV_GPU_UTIL&#39;</span>
-<span class="go">&quot;__name__&quot;:&quot;DCGM_FI_DEV_GPU_UTIL&quot;</span>
-<span class="go">&quot;UUID&quot;:&quot;GPU-df2bfa0a-183e-d378-e4ab-1042a1736a51&quot;</span>
-<span class="go">&quot;modelName&quot;:&quot;Tesla T4&quot;</span>
-<span class="go">&quot;Hostname&quot;:&quot;k0s-gpu-0&quot;</span>
-<span class="go">&quot;pci_bus_id&quot;:&quot;00000001:00:00.0&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">'http://localhost:9090/api/v1/query?query=DCGM_FI_DEV_GPU_UTIL'</span>
+<span class="go">"__name__":"DCGM_FI_DEV_GPU_UTIL"</span>
+<span class="go">"UUID":"GPU-df2bfa0a-183e-d378-e4ab-1042a1736a51"</span>
+<span class="go">"modelName":"Tesla T4"</span>
+<span class="go">"Hostname":"k0s-gpu-0"</span>
+<span class="go">"pci_bus_id":"00000001:00:00.0"</span>
 </code></pre></div>
 <p>Further reading:</p>
 <ul>
@@ -3485,16 +3513,16 @@ The important part here is not just that metrics exist, but that they are querya
 We installed <code>kube-prometheus-stack</code>, created a <code>ServiceMonitor</code> for a sample inference-shaped workload, and verified that Prometheus discovered the target and stored its metrics with workload-identifying labels.
 This demonstrates the standard collection path most AI services use in practice: workload metrics exposed on <code>/metrics</code>, discovered by <code>ServiceMonitor</code>, and stored in Prometheus.</p>
 <p>Minimal example:</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;http://localhost:9090/api/v1/query&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">&#39;query=up{job=&quot;sample-inference&quot;}&#39;</span>
-<span class="go">&quot;job&quot;:&quot;sample-inference&quot;</span>
-<span class="go">&quot;namespace&quot;:&quot;default&quot;</span>
-<span class="go">&quot;service&quot;:&quot;sample-inference&quot;</span>
-<span class="go">&quot;value&quot;:[..., &quot;1&quot;]</span>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">'http://localhost:9090/api/v1/query'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">'query=up{job="sample-inference"}'</span>
+<span class="go">"job":"sample-inference"</span>
+<span class="go">"namespace":"default"</span>
+<span class="go">"service":"sample-inference"</span>
+<span class="go">"value":[..., "1"]</span>
 
-<span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;http://localhost:9090/api/v1/query&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">&#39;query=node_cpu_seconds_total{job=&quot;sample-inference&quot;}&#39;</span>
-<span class="go">&quot;__name__&quot;:&quot;node_cpu_seconds_total&quot;</span>
+<span class="gp">$ </span>curl<span class="w"> </span>-s<span class="w"> </span><span class="s1">'http://localhost:9090/api/v1/query'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-urlencode<span class="w"> </span><span class="s1">'query=node_cpu_seconds_total{job="sample-inference"}'</span>
+<span class="go">"__name__":"node_cpu_seconds_total"</span>
 </code></pre></div>
 <p>Further reading:</p>
 <ul>
@@ -3541,9 +3569,9 @@ This goes beyond a basic install check: it shows CRD registration, reconciliatio
 <span class="go">DeletedHeadPod</span>
 <span class="go">CreatedHeadPod</span>
 
-<span class="gp">$ </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$HEAD_POD</span><span class="s2">&quot;</span><span class="w"> </span>--<span class="w"> </span>python<span class="w"> </span>-
+<span class="gp">$ </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$HEAD_POD</span><span class="s2">"</span><span class="w"> </span>--<span class="w"> </span>python<span class="w"> </span>-
 <span class="go">Result: [0, 1, 4, 9, 16]</span>
-<span class="go">Cluster resources: {&#39;CPU&#39;: 2.0, ...}</span>
+<span class="go">Cluster resources: {'CPU': 2.0, ...}</span>
 </code></pre></div>
 <p>Further reading:</p>
 <ul>
@@ -3599,14 +3627,6 @@ This goes beyond a basic install check: it shows CRD registration, reconciliatio
     
     
     
-    <a href="https://x.com/k0sproject" target="_blank" rel="noopener" title="k0s on X" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
-    </a>
-  
-    
-    
-    
-    
     <a href="https://blog.k0sproject.io/" target="_blank" rel="noopener" title="The k0sproject community blog" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224 24c0-13.3 10.7-24 24-24 145.8 0 264 118.2 264 264 0 13.3-10.7 24-24 24s-24-10.7-24-24c0-119.3-96.7-216-216-216-13.3 0-24-10.7-24-24M80 96c26.5 0 48 21.5 48 48v224c0 26.5 21.5 48 48 48s48-21.5 48-48-21.5-48-48-48c-8.8 0-16-7.2-16-16v-64c0-8.8 7.2-16 16-16 79.5 0 144 64.5 144 144s-64.5 144-144 144S32 447.5 32 368V144c0-26.5 21.5-48 48-48m168 0c92.8 0 168 75.2 168 168 0 13.3-10.7 24-24 24s-24-10.7-24-24c0-66.3-53.7-120-120-120-13.3 0-24-10.7-24-24s10.7-24 24-24"/></svg>
     </a>
@@ -3623,7 +3643,7 @@ This goes beyond a basic install check: it shows CRD registration, reconciliatio
     
     
     
-    <a href="https://kubernetes.slack.com/archives/C07VAPJUECS" target="_blank" rel="noopener" title="k0s on the k8s slack" class="md-social__link">
+    <a href="https://kubernetes.slack.com/archives/C0809EA06QZ" target="_blank" rel="noopener" title="#k0s-users on Kubernetes Slack" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M94.1 315.1c0 25.9-21.2 47.1-47.1 47.1S0 341 0 315.1 21.2 268 47.1 268h47.1v47.1zm23.7 0c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1v117.8c0 25.9-21.2 47.1-47.1 47.1s-47.1-21.2-47.1-47.1zm47.1-189c-25.9 0-47.1-21.2-47.1-47.1s21.2-47 47.1-47S212 53.2 212 79.1v47.1h-47.1zm0 23.7c25.9 0 47.1 21.2 47.1 47.1S190.8 244 164.9 244H47.1C21.2 244 0 222.8 0 196.9s21.2-47.1 47.1-47.1zm189 47.1c0-25.9 21.2-47.1 47.1-47.1s47 21.2 47 47.1-21.2 47.1-47.1 47.1h-47.1v-47.1zm-23.7 0c0 25.9-21.2 47.1-47.1 47.1S236 222.8 236 196.9V79.1c0-25.9 21.2-47.1 47.1-47.1s47.1 21.2 47.1 47.1zm-47.1 189c25.9 0 47.1 21.2 47.1 47.1s-21.2 47-47.1 47-47.1-21.2-47.1-47.1v-47.1h47.1zm0-23.7c-25.9 0-47.1-21.2-47.1-47.1s21.2-47.1 47.1-47.1h117.8c25.9 0 47.1 21.2 47.1 47.1s-21.2 47.1-47.1 47.1z"/></svg>
     </a>
   
@@ -3650,10 +3670,10 @@ This goes beyond a basic install check: it shows CRD registration, reconciliatio
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["toc.autohide", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "stable", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["toc.autohide", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "stable", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
